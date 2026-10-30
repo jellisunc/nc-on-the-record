@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NC On The Record — Says vs. Did | North Carolina 2026 Election</title>
+<meta name="description" content="A nonpartisan record check for North Carolina's unaffiliated voters. What candidates say, what they actually did, and the risk in the gap — every claim linked to its source.">
+<meta property="og:title" content="NC On The Record — Says vs. Did">
+<meta property="og:description" content="Nonpartisan record check for NC's unaffiliated voters: stated positions vs. actual records for the Nov 3, 2026 election.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --ink:#1a1a18; --paper:#faf8f3; --card:#ffffff; --line:#ddd6c7;
+    --accent:#0a4d8c; --accent-soft:#e8eff6;
+    --says:#0a4d8c; --did:#6b4e00; --risk:#8c2f0a;
+    --muted:#5c574c; --chip:#efe9db;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:Georgia,'Times New Roman',serif; background:var(--paper); color:var(--ink); line-height:1.55;}
+  a{color:var(--accent); text-decoration:underline; text-underline-offset:2px;}
+  .wrap{max-width:880px; margin:0 auto; padding:0 18px 64px;}
+  header.masthead{border-bottom:3px double var(--ink); padding:28px 0 18px; text-align:center;}
+  .kicker{font-family:Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--muted);}
+  h1{font-size:42px; line-height:1.1; margin:8px 0 6px; font-weight:900;}
+  .tagline{font-size:19px; font-style:italic; color:var(--muted);}
+  .tagline strong{color:var(--ink); font-style:normal;}
+  .rules{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:14px;}
+  .rules span{font-family:Helvetica,Arial,sans-serif; font-size:12px; background:var(--chip); border:1px solid var(--line); border-radius:20px; padding:4px 12px;}
+  .alert{background:#fdf3e3; border:1px solid #e3c98a; border-left:5px solid #d9a441; border-radius:6px; padding:14px 16px; margin:22px 0;}
+  .alert h2{font-size:17px; margin-bottom:6px;}
+  .alert p{font-size:15px;}
+  section{margin-top:38px;}
+  h2.section-title{font-size:27px; border-bottom:2px solid var(--ink); padding-bottom:6px; margin-bottom:6px;}
+  .section-sub{color:var(--muted); font-size:15px; margin-bottom:16px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:720px){.grid2{grid-template-columns:1fr;} h1{font-size:33px;}}
+  .cand{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:18px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .cand h3{font-size:22px; line-height:1.2;}
+  .cand .party{font-family:Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:2px;}
+  .cand .bio{font-size:14px; color:var(--muted); margin:6px 0 12px;}
+  .block{margin-top:14px;}
+  .block h4{font-family:Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:2px; text-transform:uppercase; padding:3px 8px; display:inline-block; border-radius:3px; margin-bottom:7px;}
+  .block.says h4{background:var(--accent-soft); color:var(--says);}
+  .block.did h4{background:#f6ecd2; color:var(--did);}
+  .block.risk h4{background:#f9e8e0; color:var(--risk);}
+  .block.align h4{background:#e9e6df; color:var(--ink);}
+  .block ul{list-style:none;}
+  .block li{font-size:14.5px; margin-bottom:8px; padding-left:14px; position:relative;}
+  .block li::before{content:"—"; position:absolute; left:0; color:var(--muted);}
+  .src{font-size:12px; color:var(--muted); font-family:Helvetica,Arial,sans-serif;}
+  .src a{color:var(--muted);}
+  .norecord{background:#f4f1e8; border:1px dashed var(--muted); border-radius:6px; padding:12px 14px; font-size:14.5px; margin-top:14px;}
+  .dispute{background:#f7f5ef; border:1px solid var(--line); border-left:5px solid var(--muted); border-radius:6px; padding:14px 16px; margin-top:18px;}
+  .dispute h3{font-size:17px; margin-bottom:6px;}
+  .dispute p{font-size:14.5px; margin-bottom:6px;}
+  .label{font-family:Helvetica,Arial,sans-serif; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; background:var(--ink); color:#fff; padding:2px 8px; border-radius:3px;}
+  .amend{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:18px; margin-bottom:16px;}
+  .amend h3{font-size:19px; margin-bottom:8px;}
+  .amend .official{font-style:italic; background:#f7f5ef; border-left:3px solid var(--muted); padding:10px 12px; font-size:14.5px; margin-bottom:10px;}
+  .amend p{font-size:14.5px; margin-bottom:6px;}
+  .votegrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; margin-top:14px;}
+  .votecard{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:14px 16px;}
+  .votecard h3{font-size:16px; margin-bottom:5px;}
+  .votecard p{font-size:14px;}
+  .method{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:18px;}
+  .method p, .method li{font-size:14.5px;}
+  .method ul{margin:8px 0 8px 20px;}
+  footer{margin-top:48px; border-top:2px solid var(--ink); padding-top:14px; font-size:13px; color:var(--muted); text-align:center;}
+  .biglink{display:inline-block; font-family:Helvetica,Arial,sans-serif; font-weight:bold; background:var(--accent); color:#fff; padding:10px 18px; border-radius:6px; text-decoration:none; margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <div class="kicker">North Carolina · General Election · Tuesday, November 3, 2026</div>
+  <h1>NC On The Record</h1>
+  <p class="tagline"><strong>Says vs. Did.</strong> A nonpartisan record check built for North Carolina's unaffiliated voters — the largest bloc in the state.</p>
+  <div class="rules">
+    <span>Same rules for every candidate</span>
+    <span>Every claim linked to its source</span>
+    <span>No endorsements. No scores for sale.</span>
+    <span>Records over ads</span>
+  </div>
+</header>
+
+<div class="alert">
+  <h2>⏰ Early voting ends tomorrow — Saturday, Oct 31 at 3:00 PM</h2>
+  <p>Early voting is also your <strong>last chance to register</strong> (same-day registration is not available on Election Day). On Tuesday, Nov 3, polls are open <strong>6:30 AM – 7:30 PM</strong> at your assigned polling place. You'll be asked for photo ID — if you don't have one, you can still vote by filling out an ID Exception Form. <span class="src">Source: <a href="https://www.ncsbe.gov/registering/how-register/register-person-during-early-voting">NC State Board of Elections</a></span></p>
+  <p style="margin-top:8px;"><a class="biglink" href="https://vt.ncsbe.gov/RegLkup/">See your exact ballot &amp; polling place (official)</a></p>
+  <p style="margin-top:8px; font-size:14px;">Unaffiliated voters vote the same full ballot as everyone else in a general election — your registration never limits which candidates you can choose in November.</p>
+</div>
+
+<section id="senate">
+  <h2 class="section-title">U.S. Senate — the open seat</h2>
+  <p class="section-sub">Sen. Thom Tillis is retiring, so nobody in this race is an incumbent. One candidate has an eight-year record as governor to audit; the other has never held elected office. That difference is the race. Outside groups had reported <strong>$77.5 million</strong> in independent spending on this race through Oct 26 — most of the ads you'll see aren't from the candidates at all. <span class="src">Sources: <a href="https://paidforpolitics.com/races/nc-senate">Paid for Politics (FEC data)</a>; ballot: <a href="https://ballotexplained.com/races/north-carolina/us-senate">NC State Board of Elections candidate list</a></span></p>
+
+  <div class="grid2">
+    <article class="cand">
+      <div class="party">Democrat</div>
+      <h3>Roy Cooper</h3>
+      <p class="bio">Governor of NC 2017–2025 · Attorney General 2001–2017 · State senator &amp; representative before that. Age 69.</p>
+
+      <div class="block says">
+        <h4>Says — 2026 campaign</h4>
+        <ul>
+          <li>Signature promise: <strong>"Make Stuff Cost Less"</strong> — groceries, health care, utilities, child care, housing; hold Duke Energy accountable. <span class="src">(<a href="https://roycooper.com/costless/">roycooper.com</a>)</span></li>
+          <li>Would vote to <strong>roll back the Trump tariffs</strong>; restore ACA premium tax credits, reverse the 2025 law's Medicaid cuts, expand Medicare drug-price negotiation. <span class="src">(<a href="https://news.ballotpedia.org/2026/04/06/roy-cooper-d-michael-whatley-r-and-three-other-candidates-are-running-in-north-carolinas-u-s-senate-election-on-november-3-2026/">Ballotpedia News</a>)</span></li>
+          <li>Border security with ICE focused on people who committed violent crimes; says he backed the 2024 bipartisan border bill.</li>
+          <li>Guns: disarm domestic abusers, act on untraceable "ghost guns," ban assault weapons. Defends reproductive rights; points to his veto of the 12-week abortion law.</li>
+        </ul>
+      </div>
+
+      <div class="block did">
+        <h4>Did — the record</h4>
+        <ul>
+          <li><strong>104 vetoes — 52 overridden.</strong> Both are state records. Republicans held veto-proof supermajorities for 4 of his 8 years. <span class="src">(<a href="https://www.theassemblync.com/news/politics/roy-cooper-legacy-governor-north-carolina/">The Assembly</a>)</span></li>
+          <li><strong>Medicaid expansion:</strong> signed HB 76 on March 27, 2023 — while publicly opposing its budget-contingency clause — then let the 2023 budget become law <em>unsigned</em> to trigger it. Coverage started Dec 1, 2023 for roughly 600,000 adults. <span class="src">(<a href="https://governor.nc.gov/news/press-releases/2023/07/03/governor-cooper-urges-legislature-separate-medicaid-expansion-budget">governor.nc.gov</a>)</span></li>
+          <li>Vetoed the 12-week abortion law (SB 20) — overridden, law took effect. Vetoed voter ID (SB 824, after voters approved the amendment 55.5%) — overridden. Vetoed the pistol-permit repeal (SB 41) — overridden. <span class="src">(<a href="https://sites.ncleg.gov/library/2023/05/">NC Legislative Library</a>)</span></li>
+          <li>Vetoed sheriff–ICE cooperation bills in 2019 and 2022 (vetoes sustained) and again in 2024 (overridden).</li>
+          <li><strong>Signed</strong> the 2021 bipartisan budget (SB 105): personal income tax cut 5.25% → 3.99% and the <strong>corporate income tax phased to 0% by 2030</strong>. Also signed the HB2 repeal compromise, the HB 951 clean-energy law, and sports-betting legalization. <span class="src">(<a href="https://poole.ncsu.edu/thought-leadership/article/north-carolina-set-to-become-the-newest-0-corporate-income-tax-rate-state/">NC State Poole College</a>)</span></li>
+        </ul>
+      </div>
+
+      <div class="block align">
+        <h4>Says vs. Did — the check</h4>
+        <ul>
+          <li><strong>Matches:</strong> his health-care promise matches his central documented act as governor — expansion to ~600,000 people, passed with a Republican legislature. His "worked with Republicans" claim is backed by specific signed laws.</li>
+          <li><strong>Tension:</strong> he campaigns as a bipartisan dealmaker while holding the state record for vetoes <em>and</em> overrides — many of his stated positions were overridden, not enacted. He campaigns against tax cuts for the wealthy while his signature sits on the budget phasing the corporate tax to zero. His campaign stresses border security; his record includes three ICE-bill vetoes.</li>
+        </ul>
+      </div>
+
+      <div class="block risk">
+        <h4>Risk check</h4>
+        <ul>
+          <li>His record is long and fully checkable — but it's an <em>executive</em> record (signing, vetoing, administering). He's never cast votes in Congress; his last legislative service ended in 2001.</li>
+          <li>Because 52 vetoes were overridden, several documented "positions" describe what he tried to do, not what became law.</li>
+          <li>His leverage in Raleigh tracked seat counts: 2019–2022 every veto held; 2023–2024 nearly all were overridden. The same variable would apply in the Senate.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="cand">
+      <div class="party">Republican</div>
+      <h3>Michael Whatley</h3>
+      <p class="bio">Chairman of the Republican National Committee 2024–2025 · NC Republican Party chair 2019–2024 · Before that: Bush administration energy official, Senate chief of staff, energy-industry lobbyist.</p>
+
+      <div class="block says">
+        <h4>Says — 2026 campaign</h4>
+        <ul>
+          <li>Entered the race at President Trump's request, with his "Complete and Total Endorsement." Core pledge: <em>"President Trump deserves an ally and North Carolina deserves a strong conservative voice in the Senate. I will be that voice."</em> <span class="src">(<a href="https://srnnews.com/rnc-chairman-michael-whatley-plans-to-run-for-senate-in-north-carolina-with-trumps-backing">AP</a>)</span></li>
+          <li>Make the Trump tax cuts permanent; no tax on tips, overtime, or Social Security; cut spending; expand energy production. <strong>Supports</strong> Trump's tariffs (the opposite of Cooper). <span class="src">(<a href="https://michaelwhatley.com/issues/">michaelwhatley.com</a>)</span></li>
+          <li>Crime leads his issues page: "back the blue without apology." On immigration: "100% supportive of President Trump securing the border and deporting the millions of criminal illegal aliens."</li>
+          <li>Strongly pro-life; praised the <em>Dobbs</em> decision and NC's 12-week law; endorsed by SBA Pro-Life America. His issues page lists <strong>no detailed health-care plan</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="norecord"><strong>No voting record exists.</strong> Whatley has never held elected office — this is his first run. There are no votes, budgets, or administered programs to audit. Everything in "Says" above is a promise, an endorsement, or a party-platform position.</div>
+
+      <div class="block did">
+        <h4>Did — the checkable record</h4>
+        <ul>
+          <li>As RNC chair he issued the party's statement praising the 2025 "One Big Beautiful Bill" as "a huge win for all Americans." The CBO estimates that law cuts about $1 trillion from Medicaid over a decade; NC Newsline put the NC share at roughly $50 billion. <span class="src">(<a href="https://www.thedigitalfreepress.com/post/north-carolina-senate-voter-guide-cooper-whatley-bray-dublin">NC Newsline via Digital Free Press</a>)</span></li>
+          <li>A CNN KFile review found that after the 2020 election he repeatedly claimed "massive fraud" in Milwaukee, Detroit, and Philadelphia. No evidence of massive fraud was found in those cities, and 60+ post-election cases were lost. He later acknowledged Biden as the legitimate president.</li>
+          <li>Tasked by Trump in Jan 2025 with overseeing Hurricane Helene recovery in western NC and named to the FEMA Review Council (whose report recommended shifting flood insurance toward private markets). A Citizen Times public-records review found few documented contacts with state/county recovery officials; Whatley counters with federal funding totals — figures he has cited vary ($5B+ in Sept 2025; $11B claimed on X). <span class="src">(<a href="https://www.citizen-times.com/story/news/local/2026/09/25/records-little-involvement-michael-whatley-helene-recovery/91762630007/">Asheville Citizen Times</a>)</span></li>
+          <li>Spent roughly a decade as an energy-industry lobbyist (HBW Resources; Consumer Energy Alliance) before party leadership — the private-sector record behind his energy-production platform.</li>
+        </ul>
+      </div>
+
+      <div class="block align">
+        <h4>Says vs. Did — the check</h4>
+        <ul>
+          <li><strong>Matches:</strong> his central promise — loyalty to the Trump agenda — is consistent with his documented behavior: six years running Trump's party apparatus at state and national level, and he entered this race at the president's request.</li>
+          <li><strong>Cannot be checked:</strong> no specific policy promise (taxes, border, police funding) can be compared against any vote or administered program, because there is none. One opponent claim to treat carefully: that he would back a <em>national abortion ban</em> is inferred from endorsements and platform — it is <strong>not stated on his campaign site</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="block risk">
+        <h4>Risk check</h4>
+        <ul>
+          <li><strong>Promise-based candidacy:</strong> nothing to audit. On any issue his campaign hasn't addressed, there is no record to predict from.</li>
+          <li><strong>Alignment is the platform:</strong> he has not campaigned on any point of divergence from the president. Expect votes that track the administration's positions — including state-specific effects his opponent is campaigning against.</li>
+          <li>His leadership experience is running party organizations and election litigation — never a government agency or a public budget.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <div class="dispute">
+    <h3><span class="label">Contested claim</span>&nbsp; The prison-settlement ad claim</h3>
+    <p><strong>The claim:</strong> Whatley's campaign says a Feb 2021 COVID-era prison settlement by Cooper's administration released DeCarlos Brown Jr., the man later charged with the August 2025 Charlotte light-rail killing of Iryna Zarutska. The settlement itself is real — it moved roughly 3,500 prisoners to early release or supervision over COVID conditions.</p>
+    <p><strong>The official record:</strong> the NC Department of Adult Correction states Brown was <strong>not</strong> released early under the settlement: he completed his mandatory minimum sentence for armed robbery and was released September 20, 2020 — five months <em>before</em> the settlement existed. Weigh the claim against that. <span class="src">Sources: <a href="https://www.theassemblync.com/news/politics/justice/the-blame-game/">The Assembly</a>; <a href="https://roycooper.com/icymi-charlotte-observer-fact-check-gov-roy-cooper-did-not-release-decarlos-brown-jr-early-from-prison/">Charlotte Observer fact check</a></span></p>
+  </div>
+
+  <h3 style="font-size:20px; margin:26px 0 10px;">Also on your Senate ballot</h3>
+  <div class="grid2">
+    <article class="cand">
+      <div class="party">Libertarian</div>
+      <h3>Shannon W. Bray</h3>
+      <p class="bio">Disabled U.S. Navy veteran (1991–1997); enterprise architect and cybersecurity professional; the Libertarians' 2022 Senate nominee as well.</p>
+      <div class="block says">
+        <h4>Says</h4>
+        <ul>
+          <li>Lower and simpler taxes; end corporate handouts; health-care decisions by patients and doctors, not federal agencies — repeal federal health-care mandates, expand Health Savings Accounts; auditable elections with mandatory risk-limiting audits. <span class="src">(<a href="https://ballotpedia.org/Shannon_Bray">Ballotpedia</a>)</span></li>
+        </ul>
+      </div>
+      <div class="norecord"><strong>No voting record.</strong> Bray has never held elected office. His public record is campaign statements and questionnaires — nothing to audit, stated plainly.</div>
+    </article>
+    <article class="cand">
+      <div class="party">Green</div>
+      <h3>Michael Dublin</h3>
+      <p class="bio">Raleigh native; retired public school teacher; U.S. Marine Corps veteran; prison-ministry leader; co-chair of the NC Green Party Black Caucus.</p>
+      <div class="block says">
+        <h4>Says</h4>
+        <ul>
+          <li>$25 federal minimum wage; 32-hour work week with no loss of pay; guaranteed income of $4,000/month for the unemployed, disabled, elderly, and stay-at-home parents; free health care for all; Green New Deal; overturn <em>Citizens United</em>. <span class="src">(<a href="https://www.gp.org/michael_dublin_know_your_candidate_for_us_senate">NC Green Party</a>)</span></li>
+        </ul>
+      </div>
+      <div class="norecord"><strong>No voting record.</strong> Dublin has never held elected office. His public record is campaign statements and party materials — nothing to audit, stated plainly.</div>
+    </article>
+  </div>
+  <p style="margin-top:12px; font-size:14px;">One checkable fact about access: Bray and Dublin both showed up to debate on October 15, 2026. The Cooper and Whatley campaigns did not respond to the invitations, per the organizers. <span class="src">(<a href="https://www.einpresswire.com/article/948109375/bray-and-dublin-to-debate-as-early-voting-opens-cooper-and-whatley-campaigns-never-responded-to-invitations">EIN Presswire</a>)</span></p>
+</section>
+
+<section id="court">
+  <h2 class="section-title">NC Supreme Court — Associate Justice</h2>
+  <p class="section-sub">An eight-year term, and the only seat on the court up this year. The court has a 5–2 Republican majority that this race doesn't change — what it changes is the margin on the cases that split it. One honest complication: these two records are different <em>kinds</em> of record. A judge's record is her opinions. A legislator's record is his or her votes. We show each as it is. <span class="src">(<a href="https://www.publicradioeast.org/2026-09-22/nc-supreme-court-candidates-anita-earls-sarah-stevens">Public Radio East</a>)</span></p>
+
+  <div class="grid2">
+    <article class="cand">
+      <div class="party">Democrat · Incumbent</div>
+      <h3>Anita Earls</h3>
+      <p class="bio">On the court since Jan 1, 2019 · Yale Law, 1987 · Deputy Assistant AG in the Clinton Justice Department's Civil Rights Division · Founded the Southern Coalition for Social Justice (2007) after ~30 years as a civil-rights attorney.</p>
+
+      <div class="block says">
+        <h4>Says — judicial philosophy</h4>
+        <ul>
+          <li>"The Constitution is supreme… even if it means finding that a law passed by the General Assembly was unconstitutional." She names the legislature — not campaign money — as "the biggest threat to judicial independence." <span class="src">(<a href="https://www.citizen-times.com/story/news/politics/elections/2026/10/14/anita-earls-sarah-stevens-clash-over-helene-in-nc-supreme-court-race/92175788007/">Citizen Times</a>)</span></li>
+          <li>Second-term focus: North Carolinians' lack of access to legal services; campaigns on "Keeping NC's Courts Fair and Independent."</li>
+        </ul>
+      </div>
+
+      <div class="block did">
+        <h4>Did — the rulings</h4>
+        <ul>
+          <li><strong><em>Holmes v. Moore</em> (2022) — she wrote it.</strong> Her 4–3 majority struck down the SB 824 voter ID law, finding it was enacted with racially discriminatory intent. After the court's membership changed, the new majority reversed her opinion on rehearing in April 2023 and upheld the law; Earls dissented.</li>
+          <li><strong><em>Harper v. Hall</em> (2022) — joined the majorities</strong> striking down the legislature's maps as unconstitutional partisan gerrymanders. Also overruled on rehearing in April 2023; Earls dissented, calling rehearing based on a change in the court's composition a "radical break with 205 years of history."</li>
+          <li><strong>Leandro education case (Apr 2026) — dissented</strong> when the majority dismissed the court's ruling that the state must provide a sound basic education, writing that the court damaged "its own legitimacy by trying to rewrite a fundamental constitutional guarantee."</li>
+          <li><strong><em>State v. Harvey</em> (2019) — her first dissent</strong>, in a criminal case: she argued a defendant's self-defense claim should have gone to the jury. Included here because her record isn't only election law.</li>
+        </ul>
+      </div>
+
+      <div class="block risk">
+        <h4>Risk check</h4>
+        <ul>
+          <li>Her two highest-profile rulings were both reversed on rehearing after the court's membership flipped — her record is partly a record of the losing side of the current court.</li>
+          <li>She came to the bench after a career advocating one side of the cases she now judges (civil-rights litigation), and co-chaired Gov. Cooper's Task Force for Racial Equity in Criminal Justice — a point her opponent raises. Voters can weigh how much that background predicts her judging.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="cand">
+      <div class="party">Republican · Challenger</div>
+      <h3>Sarah Stevens</h3>
+      <p class="bio">Family-law attorney in Mount Airy since 1986 · NC House, District 90, 2009 – June 2026 (resigned to campaign) · Speaker Pro Tempore 2017–2025 · Has never served as a judge.</p>
+
+      <div class="block says">
+        <h4>Says — judicial philosophy</h4>
+        <ul>
+          <li>"I am a strict construction constitutionalist. I believe a justice is a referee and not a king. Their job is to follow the law as it is written not as they want it to be." She names U.S. Justice Amy Coney Barrett as the justice who best reflects her philosophy. <span class="src">(<a href="https://ivoterguide.com/candidate/2152/race/30765/election/1457">iVoterGuide questionnaire</a>)</span></li>
+          <li>In the official judicial voter guide: "I believe in the neutral application of the law." Announced pledging to "be a conservative voice for justice and families on the Supreme Court."</li>
+        </ul>
+      </div>
+
+      <div class="block did">
+        <h4>Did — the votes (NC House)</h4>
+        <ul>
+          <li><strong>SB 20 (2023) — voted YES, including the veto override:</strong> the law moving NC's abortion limit from 20 weeks to 12. She defended it on the floor as "a mainstream approach." <span class="src">(<a href="https://www.ncleg.gov/BillLookUp/2023/S20">ncleg.gov</a>)</span></li>
+          <li><strong>SB 921 (2024) — voted YES:</strong> the bill that put <strong>Amendment 1</strong> below (photo ID for all voting methods) on this year's ballot. In 2018 she also voted YES on, and co-sponsored, the original voter ID amendment.</li>
+          <li><strong>HB 1089 (2026) — voted YES:</strong> the bill that put <strong>Amendment 3</strong> below (property tax) on this year's ballot.</li>
+          <li><strong>HB 307, "Iryna's Law" (2025) — she sponsored it:</strong> restricts cashless bail and changes pretrial-release and mental-health commitment rules.</li>
+          <li>As an election-law committee co-chair she was a primary sponsor of HB 958, a package of election-law changes, and a lead sponsor of a bill letting the chief justice suspend trial judges without pay.</li>
+        </ul>
+      </div>
+
+      <div class="block risk">
+        <h4>Risk check</h4>
+        <ul>
+          <li>No judicial record exists — she has never been a judge. Her checkable record is 17 years of partisan legislative voting, which is normal for a legislator and a different thing from judging.</li>
+          <li>She voted to place two of the three amendments on this ballot and helped write the state's election laws as a committee leader — laws of exactly the kind that come before the court she seeks to join. Whether that is experience or entanglement is the voter's call; the votes are documented above.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="amendments">
+  <h2 class="section-title">The 3 constitutional amendments</h2>
+  <p class="section-sub">No candidates here — you are the decision. Each card quotes the <strong>official ballot language</strong> (from the session law that placed it on the ballot), then what a YES actually changes in plain English, using the nonpartisan Legislative Services Office summaries. All three were put on the ballot by the General Assembly and pass with a simple majority of votes cast on the question.</p>
+
+  <div class="amend">
+    <h3>Amendment 1 — Photo ID for all voters</h3>
+    <div class="official">"Constitutional amendment to require all voters, not just those presenting to vote in person, to present photo identification before voting."</div>
+    <p><strong>What changes:</strong> the constitution today requires photo ID only from voters "offering to vote in person." This amendment deletes that qualifier, extending the constitutional requirement to every method — including voting by mail.</p>
+    <p><strong>The context the ads skip:</strong> state statute <em>already</em> requires mail voters to include a photocopy of photo ID or an ID Exception Form (in place since 2023, upheld by the NC Supreme Court). So a YES mostly moves an existing rule from statute — which a legislature can change — into the constitution, where it can't be changed without another vote of the people. A NO leaves the constitution as it is; the mail-ballot statute stays unless the legislature repeals it.</p>
+    <p class="src">Source: <a href="https://ncleg.gov/EnactedLegislation/SessionLaws/HTML/2023-2024/SL2024-58.html">Session Law 2024-58 (SB 921)</a></p>
+  </div>
+
+  <div class="amend">
+    <h3>Amendment 2 — State income tax cap: 7% → 3.5%</h3>
+    <div class="official">"Constitutional amendment to keep the State income tax rate from being raised higher than three and one-half percent (3.5%)."</div>
+    <p><strong>What changes:</strong> the constitutional ceiling on the state income tax drops from 7% to 3.5%, for tax years starting Jan 1, 2027. Per the nonpartisan Legislative Analysis Division, the cap applies to personal <em>and</em> corporate income taxes.</p>
+    <p><strong>The context the ads skip:</strong> this changes <strong>nobody's current tax bill</strong>. The actual personal rate is 3.99% for 2026 and is already scheduled by statute to fall to 2.99% by 2033; the corporate rate is already headed to 0% by 2030. A YES is a vote about the <em>future</em>: no General Assembly could raise the income tax above 3.5% — in a recession, a disaster, or any emergency — without first getting voters to amend the constitution again. A NO keeps the ceiling at 7% and leaves the scheduled rate cuts untouched either way.</p>
+    <p class="src">Sources: <a href="https://www.ncleg.gov/EnactedLegislation/SessionLaws/HTML/2025-2026/SL2026-4.html">Session Law 2026-4 (SB 1080)</a>; <a href="https://dashboard.ncleg.gov/api/Services/BillSummary/2025/S1080-SMBA-128(sl)-v-10">Legislative Analysis Division summary</a></p>
+  </div>
+
+  <div class="amend">
+    <h3>Amendment 3 — Property tax limits (the one with no number in it)</h3>
+    <div class="official">"Constitutional amendment requiring limits on property tax increases by local governments."</div>
+    <p><strong>What changes:</strong> read the amendment's actual text and you will not find a cap — no percentage, no dollar figure, no formula. It adds one sentence to the constitution ordering the General Assembly to "enact general laws limiting the amount by which the levy of taxes on property may increase, which may include exceptions." The limit itself would be written later, by a future legislature, with whatever exceptions it chooses.</p>
+    <p><strong>Two distinctions that matter:</strong> (1) it limits growth in a local government's total <em>levy</em> (total collections), which is not the same as capping your individual tax bill; (2) a statutory cap already exists — state law caps most county and city property tax <em>rates</em> at $1.50 per $100 of value (G.S. 153A-149 / 160A-209), though rates and levy growth are different levers. A YES votes for a limit that does not yet exist in any specific form. A NO leaves levy growth governed by current law and local elected boards.</p>
+    <p class="src">Sources: <a href="https://www.ncleg.gov/Sessions/2025/Bills/House/PDF/H1089v3.pdf">Session Law 2026-5 (HB 1089)</a>; <a href="https://webservices.ncleg.gov/ViewDocSiteFile/119268">nonpartisan legislative staff analysis</a></p>
+  </div>
+</section>
+
+<section id="ballot">
+  <h2 class="section-title">Your full ballot</h2>
+  <p class="section-sub">Beyond the statewide races above, your ballot includes your U.S. House district, your NC Senate and NC House districts, Court of Appeals and local judges, and county offices. Those races are decided by where you live — and the honest way to see them is the official sample ballot, not a summary site.</p>
+  <div class="votecard" style="max-width:560px;">
+    <h3>See your exact ballot</h3>
+    <p>The NC State Board of Elections voter search shows your registration, your districts, your polling place, and your personal sample ballot.</p>
+    <a class="biglink" href="https://vt.ncsbe.gov/RegLkup/">Open the official voter search</a>
+    <p style="margin-top:10px;">Checking a state legislator's votes: every roll call is published at <a href="https://www.ncleg.gov">ncleg.gov</a> under the member's name. For U.S. House members, votes are at <a href="https://www.govtrack.us">GovTrack</a> and <a href="https://www.congress.gov">congress.gov</a>.</p>
+  </div>
+</section>
+
+<section id="method">
+  <h2 class="section-title">How this site works</h2>
+  <div class="method">
+    <p>Unaffiliated voters are North Carolina's largest registration group — and the voters that campaign ads, which are mostly funded by outside groups, are least honest with. This site exists to put the record in one place.</p>
+    <ul>
+      <li><strong>"Says"</strong> is quoted or closely paraphrased from the candidate's own campaign site and statements. Their words, not our summary of them.</li>
+      <li><strong>"Did"</strong> comes from official records: veto and bill histories at ncleg.gov, court opinions, FEC filings, and statements the candidate made in prior public roles — each linked so you can check it yourself.</li>
+      <li><strong>Same structure, same questions, every candidate</strong> — regardless of party. If a candidate has no record to check, we say so plainly. A missing record is information; it is not a verdict.</li>
+      <li><strong>Contested claims</strong> are shown as claims, next to the official record, and labeled.</li>
+      <li><strong>No</strong> endorsements, no advocacy-group scorecards, no horserace polls, no adjectives doing the work that facts should do.</li>
+      <li>Spotted an error? Every fact here carries its source — if the source says otherwise, the source wins and we correct the page.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  NC On The Record is an independent voter-information project. It is not affiliated with any candidate, party, or campaign, and it does not endorse candidates.<br>
+  Always confirm your registration, ballot, and polling place at <a href="https://www.ncsbe.gov">ncsbe.gov</a>. Information compiled October 30, 2026.
+</footer>
+
+</div>
+</body>
+</html>
